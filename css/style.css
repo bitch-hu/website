@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: auto;
+  background-color: rgb(215, 152, 11, 0.75);
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.header {
+  display: block;
+  vertical-align: baseline;
+  height: 10vh;
+  border-bottom: 1px solid #bbb;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #fff;
+}
+
+.header img {
+  max-height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blur img {
+  filter: blur(8vh);
+  -webkit-filter: blur(8vh);
+}
+
+dialog {
+  box-shadow: grey 5px 10px 15px;
+  border-radius: 8px;
+  border: none;
+}
+
+dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+dialog footer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+dialog button.over18 {
+  background-color: rgb(215, 152, 11);
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 49%;
+}
+
+dialog button.under18 {
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 49%;
+}
+
+.thumbnails {
+  overflow: auto;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  max-height: 86vh;
+  margin-top: 1vh;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px 8px 12px;
+  border-radius: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #fff;
+}
+
+.column {
+  flex: 16.66%;
+  max-width: 16.66%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  border: 1px solid #bbb;
+  width: 100%;
+}
+
+@media (max-width: 1600px) {
+  .column {
+    flex: 20%;
+    max-width: 20%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .column {
+    flex: 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 960px) {
+  .column {
+    flex: 33%;
+    max-width: 33%;
+  }
+}
+
+@media (max-width: 640px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 320px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+footer {
+  margin-top: 0.5vh;
+}
+
+summary {
+  display: block;
+  cursor: pointer;
+  color: rgb(215, 152, 11);
+  float: left;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+article > details > summary {
+  font-size: 1.5vh;
+  margin-left: 1vw;
+}
+
+details {
+  float: left;
+}
+
+details pre {
+  margin-top: 0;
+}
