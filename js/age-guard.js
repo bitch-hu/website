@@ -15,7 +15,7 @@ const getCookie = () => {
 const unblur = () => document.querySelector("#thumbnails").classList.remove("blur");
 
 const setCookie = () => {
-  document.cookie = `${cookieName}=true;expires=86400;path=/`;
+  document.cookie = `${cookieName}=true;expires=86400;path=/;domain=bitch.hu;secure`;
   unblur();
 }
 
