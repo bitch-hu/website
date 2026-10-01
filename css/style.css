@@ -1,70 +1,70 @@
 :root {
-    --bs-body-bg: rgba(215, 152, 11, 0.75);
+  --bs-body-bg: rgba(215, 152, 11, 0.75);
 }
 
 .header {
-    height: 10vh;
-    border-bottom: 1px solid #bbb;
-    background-color: #fff;
+  height: 10vh;
+  border-bottom: 1px solid #bbb;
+  background-color: #fff;
 }
 
 .blur {
-    filter: blur(8vh);
-    -webkit-filter: blur(8vh);
+  filter: blur(8vh);
+  -webkit-filter: blur(8vh);
 }
 
 summary {
-    color: rgb(215, 152, 11);
+  color: rgb(215, 152, 11);
 }
 
 .container-fluid {
-    top: 15vh;
-    height: 80vh;
-    display: flex;
-    align-items: center;
+  top: 15vh;
+  height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
 .carousel {
-    width: 80vw;
-    background-color: rgba(0, 0, 0, .3);
+  width: 80vw;
+  background-color: rgba(0, 0, 0, .3);
 }
 
 .carousel-item > img {
-    max-height: 80vh;
-    max-width: 80vw;
-    margin: 0 auto;
+  max-height: 80vh;
+  max-width: 80vw;
+  margin: 0 auto;
 }
 
 .title {
-    width: 0;
-    position: absolute;
-    bottom: 8px;
-    font-size: 1.5rem;
-    background-color: rgba(0, 0, 0, .3);
-    color: #f2f2f2;
-    text-align: center;
-    z-index: 1;
+  width: 0;
+  position: absolute;
+  bottom: 8px;
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, .3);
+  color: #f2f2f2;
+  text-align: center;
+  z-index: 1;
 }
 
 .carousel-control-prev-icon {
-    position: relative;
-    left: -25%;
+  position: relative;
+  left: -25%;
 }
 
 .carousel-control-next-icon {
-    position: relative;
-    right: -25%;
+  position: relative;
+  right: -25%;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(128, 128, 128, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.5);
 }
