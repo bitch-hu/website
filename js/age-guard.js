@@ -4,7 +4,7 @@ const getCookie = () => {
   const name = cookieName + "=";
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
-    let cookie = cookies[i].trimStart();
+    let cookie = cookies[i].trim();
     if (cookie.indexOf(name) === 0) {
       return cookie.substring(name.length);
     }
@@ -15,7 +15,7 @@ const getCookie = () => {
 const unblur = () => document.querySelector("#thumbnails").classList.remove("blur");
 
 const setCookie = () => {
-  document.cookie = `${cookieName}=true;expires=86400;path=/;domain=bitch.hu;secure`;
+  document.cookie = `${cookieName}=true;max-age=86400;path=/;domain=bitch.hu;secure`;
   unblur();
 }
 
