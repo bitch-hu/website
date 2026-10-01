@@ -17,7 +17,7 @@ renderGallery("/img/bitches", [
   {file: "pile-animals-fairy-tale-1651945.jpg", alt: "Foursome: a pussy, a cock, and a bitch with a huge ass"},
   {file: "puppy-outdoors-dog-stick-animal-7543571.jpg", alt: "Bitch enjoying a long wood"},
   {file: "rain-dog-street-nature-sad-8590529.jpg", alt: "Wet bitch"},
-  {file: "shepherd-dog-dog-domestic-animal-4357790.jpg", alt: "Like mother, like daughter (German)"},
+  {file: "shepherd-dog-dog-domestic-animal-4357790.jpg", alt: "Wie die Mutter, so die Tochter"},
   {file: "dog-ball-ball-pit-2611251.jpg", alt: "Balls loving bitch"},
   {file: "english-bulldog-bulldog-ball-dog-562723.jpg", alt: "This bitch is a real ball-juggler"},
   {file: "dog-chihuahua-small-dog-3410488.jpg", alt: "Creepy little bitch"},
