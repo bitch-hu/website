@@ -14,7 +14,10 @@ const getCookie = () => {
 
 const getAgeModal = () => document.querySelector("#ageModal");
 
-const unblur = () => document.querySelector("#thumbnails").classList.remove("blur");
+const unblur = () => {
+  document.querySelector("#thumbnails").classList.remove("blur");
+  enableThumbnails();
+}
 
 const showAgeModal = () => {
   const backdrop = document.createElement("div");

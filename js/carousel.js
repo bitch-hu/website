@@ -57,6 +57,8 @@ document.addEventListener("keyup", (e) => {
 window.addEventListener("resize", () => {
   makeTitleMatchImage();
 });
-Array.prototype.forEach.call(getThumbnails(), (img, key) => {
-  img.onclick = () => showCarousel(key);
-});
+const enableThumbnails = () => {
+  Array.prototype.forEach.call(getThumbnails(), (img, key) => {
+    img.onclick = () => showCarousel(key);
+  });
+}
