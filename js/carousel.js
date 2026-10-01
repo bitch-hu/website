@@ -1,8 +1,7 @@
+const KEY_CODES = {27: "Escape", 37: "ArrowLeft", 39: "ArrowRight"};
+
 const getCarouselContainer = () => document.querySelector('#carousel-container');
-const getCarousel = () => {
-  const carouselElement = getCarouselContainer().querySelector('.carousel');
-  return bootstrap.Carousel.getOrCreateInstance(carouselElement);
-}
+const getCarouselItems = () => getCarouselContainer().querySelectorAll('.carousel-item');
 const getThumbnails = () => document.querySelectorAll("#thumbnails img");
 const getTitle = () => document.querySelector("#image-title");
 const hideCarouselContainer = () => {
@@ -18,36 +17,46 @@ const makeTitleMatchImage = () => {
   titleElement.style.marginLeft = cs.marginLeft;
   titleElement.innerText = title;
 }
-const showCarousel = (i) => {
-  getCarouselContainer().classList.remove('hidden');
-  getCarousel().to(i);
+const getActiveIndex = () => {
+  const items = getCarouselItems();
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].classList.contains('active')) {
+      return i;
+    }
+  }
+  return 0;
+}
+const slideTo = (i) => {
+  const items = getCarouselItems();
+  const next = (i + items.length) % items.length;
+  items[getActiveIndex()].classList.remove('active');
+  items[next].classList.add('active');
   makeTitleMatchImage();
 }
-document.querySelector("#overlay").addEventListener("click", function (_) {
-  hideCarouselContainer();
-});
-getCarouselContainer().addEventListener("slide.bs.carousel", function (_) {
-  getTitle().classList.add("hidden");
-});
-getCarouselContainer().addEventListener("slid.bs.carousel", function (_) {
-  makeTitleMatchImage();
-  getTitle().classList.remove("hidden");
-});
+const prev = () => slideTo(getActiveIndex() - 1);
+const next = () => slideTo(getActiveIndex() + 1);
+const showCarousel = (i) => {
+  getCarouselContainer().classList.remove('hidden');
+  slideTo(i);
+}
+document.querySelector("#overlay").addEventListener("click", hideCarouselContainer);
+document.querySelector(".carousel-control-prev").addEventListener("click", prev);
+document.querySelector(".carousel-control-next").addEventListener("click", next);
 document.addEventListener("keyup", (e) => {
-  switch (e.key) {
+  switch (e.key || KEY_CODES[e.keyCode]) {
     case "Escape":
       hideCarouselContainer();
       break;
     case "ArrowLeft":
-      getCarousel().prev();
+      prev();
       break;
     case "ArrowRight":
-      getCarousel().next();
+      next();
   }
 });
 window.addEventListener("resize", () => {
   makeTitleMatchImage();
 });
-getThumbnails().forEach((img, key) => {
+Array.prototype.forEach.call(getThumbnails(), (img, key) => {
   img.onclick = () => showCarousel(key);
 });

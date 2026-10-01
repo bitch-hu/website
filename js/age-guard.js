@@ -12,16 +12,34 @@ const getCookie = () => {
   return "";
 }
 
+const getAgeModal = () => document.querySelector("#ageModal");
+
 const unblur = () => document.querySelector("#thumbnails").classList.remove("blur");
+
+const showAgeModal = () => {
+  const backdrop = document.createElement("div");
+  backdrop.className = "modal-backdrop show";
+  document.body.appendChild(backdrop);
+  document.body.classList.add("modal-open");
+  getAgeModal().style.display = "block";
+  getAgeModal().classList.add("show");
+}
+
+const hideAgeModal = () => {
+  getAgeModal().classList.remove("show");
+  getAgeModal().style.display = "";
+  document.body.classList.remove("modal-open");
+  document.body.removeChild(document.querySelector(".modal-backdrop"));
+}
 
 const setCookie = () => {
   document.cookie = `${cookieName}=true;max-age=86400;path=/;domain=bitch.hu;secure`;
+  hideAgeModal();
   unblur();
 }
 
 if (getCookie() !== "true") {
-  const modal = new bootstrap.Modal(document.querySelector("#ageModal"), {keyboard: false, backdrop: 'static'});
-  modal.show();
+  showAgeModal();
 } else {
   unblur();
 }
