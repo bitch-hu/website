@@ -1,4 +1,13 @@
-.modal-open .modal-backdrop {
+#ageModal {
+  display: block;
+}
+
+.age-confirmed #ageModal,
+.age-confirmed .modal-backdrop {
+  display: none;
+}
+
+.modal-backdrop {
   top: 10vh;
   background-color: rgba(0, 0, 0, 0.3);
   opacity: 1 !important;

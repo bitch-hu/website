@@ -27,10 +27,15 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
+  <script>
+    if (/(^|;\s*)claimsToBeOver18=true(;|$)/.test(document.cookie)) {
+      document.documentElement.classList.add("age-confirmed");
+    }
+  </script>
 </head>
 <body class="overflow-auto">
 <!-- Age Verification Modal -->
-<div class="modal fade" id="ageModal" role="dialog">
+<div class="modal show" id="ageModal" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,6 +62,7 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+<div class="modal-backdrop show"></div>
 <!-- /.modal -->
 <div class="py-1 align-baseline d-block header sticky-top">
   <div class="col-12 h-100">
@@ -216,7 +222,7 @@
   <!-- Carousel -->
 </div>
 <!-- Gallery -->
-<div id="thumbnails" class="row mx-5 blur">
+<div id="thumbnails" class="row mx-5">
   <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 p-1">
     <img src="/img/bitches/thumbnails/animal-company-dog-animals-animal-3047244.jpg"
          alt="Classy bitch"

@@ -8,7 +8,7 @@
   background-color: #fff;
 }
 
-.blur img {
+html:not(.age-confirmed) #thumbnails img {
   -webkit-filter: blur(24px);
   filter: blur(24px);
 }
