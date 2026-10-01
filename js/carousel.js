@@ -26,11 +26,18 @@ const getActiveIndex = () => {
   }
   return 0;
 }
+const loadImage = (image) => {
+  if (!image.getAttribute('src')) {
+    image.onload = makeTitleMatchImage;
+    image.src = image.getAttribute('data-src');
+  }
+}
 const slideTo = (i) => {
   const items = getCarouselItems();
   const next = (i + items.length) % items.length;
   items[getActiveIndex()].classList.remove('active');
   items[next].classList.add('active');
+  loadImage(items[next].querySelector('img'));
   makeTitleMatchImage();
 }
 const prev = () => slideTo(getActiveIndex() - 1);

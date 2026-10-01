@@ -8,9 +8,9 @@
   background-color: #fff;
 }
 
-.blur {
-  filter: blur(8vh);
-  -webkit-filter: blur(8vh);
+.blur img {
+  -webkit-filter: blur(24px);
+  filter: blur(24px);
 }
 
 summary {
