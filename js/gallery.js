@@ -19,18 +19,73 @@ const renderCarousel = (folder, images) => {
   });
 }
 
-const renderThumbnails = (folder, images) => {
+const createColumns = () => {
   const thumbnails = document.querySelector("#thumbnails");
+  const columns = [];
   for (let c = 0; c < THUMBNAIL_COLUMNS; c++) {
     const column = document.createElement("div");
     column.className = "col-xl-2 col-lg-3 col-md-4 col-sm-6 p-1";
-    const start = Math.round(c * images.length / THUMBNAIL_COLUMNS);
-    const end = Math.round((c + 1) * images.length / THUMBNAIL_COLUMNS);
-    images.slice(start, end).forEach((image) => {
-      column.appendChild(createImage("w-100 shadow-1-strong rounded mb-2", "src", `${folder}/thumbnails/${image.file}`, image.alt));
-    });
     thumbnails.appendChild(column);
+    columns.push(column);
   }
+  return columns;
+}
+
+// Splits heights, in order, into `count` runs with sums as equal as possible
+// (least sum of squared run sums). Returns the start index of each run plus the end.
+const partition = (heights, count) => {
+  const prefix = [0];
+  heights.forEach((h, i) => prefix.push(prefix[i] + h));
+  const n = heights.length;
+  let cost = prefix.map((sum) => sum * sum);
+  const cuts = [];
+  for (let c = 1; c < count; c++) {
+    const nextCost = [0];
+    const cut = [0];
+    for (let i = 1; i <= n; i++) {
+      nextCost[i] = Infinity;
+      for (let j = 0; j <= i; j++) {
+        const run = prefix[i] - prefix[j];
+        if (cost[j] + run * run < nextCost[i]) {
+          nextCost[i] = cost[j] + run * run;
+          cut[i] = j;
+        }
+      }
+    }
+    cost = nextCost;
+    cuts.push(cut);
+  }
+  const bounds = [n];
+  for (let c = count - 2; c >= 0; c--) {
+    bounds.unshift(cuts[c][bounds[0]]);
+  }
+  bounds.unshift(0);
+  return bounds;
+}
+
+// Keeps array order, column by column, with column heights as equal as possible.
+const placeThumbnails = (thumbnails) => {
+  const columns = createColumns();
+  const heights = thumbnails.map((img) => img.naturalWidth ? img.naturalHeight / img.naturalWidth : 0);
+  const bounds = partition(heights, THUMBNAIL_COLUMNS);
+  columns.forEach((column, c) => {
+    thumbnails.slice(bounds[c], bounds[c + 1]).forEach((img) => column.appendChild(img));
+  });
+}
+
+// Placement needs the thumbnails' heights, so wait until all of them are loaded.
+const renderThumbnails = (folder, images) => {
+  let pending = images.length;
+  const thumbnails = images.map((image, i) => {
+    const img = createImage("w-100 shadow-1-strong rounded mb-2", "src", `${folder}/thumbnails/${image.file}`, image.alt);
+    img.setAttribute("data-index", i);
+    img.onload = img.onerror = () => {
+      if (--pending === 0) {
+        placeThumbnails(thumbnails);
+      }
+    };
+    return img;
+  });
 }
 
 const renderGallery = (folder, images) => {

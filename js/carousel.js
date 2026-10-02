@@ -2,7 +2,6 @@ const KEY_CODES = {27: "Escape", 37: "ArrowLeft", 39: "ArrowRight"};
 
 const getCarouselContainer = () => document.querySelector('#carousel-container');
 const getCarouselItems = () => getCarouselContainer().querySelectorAll('.carousel-item');
-const getThumbnails = () => document.querySelectorAll("#thumbnails img");
 const getTitle = () => document.querySelector("#image-title");
 const hideCarouselContainer = () => {
   getCarouselContainer().classList.add('hidden');
@@ -65,7 +64,10 @@ window.addEventListener("resize", () => {
   makeTitleMatchImage();
 });
 const enableThumbnails = () => {
-  Array.prototype.forEach.call(getThumbnails(), (img, key) => {
-    img.onclick = () => showCarousel(key);
-  });
+  document.querySelector("#thumbnails").onclick = (e) => {
+    const index = e.target.getAttribute("data-index");
+    if (index !== null) {
+      showCarousel(Number(index));
+    }
+  };
 }
