@@ -1,7 +1,7 @@
 const KEY_CODES = {27: "Escape", 37: "ArrowLeft", 39: "ArrowRight"};
 
 const getCarouselContainer = () => document.querySelector('#carousel-container');
-const getCarouselItems = () => getCarouselContainer().querySelectorAll('.carousel-item');
+const getCarouselItems = () => getCarouselContainer().querySelectorAll('.carousel-item:not(.carousel-ad)');
 const getTitle = () => document.querySelector("#image-title");
 const hideCarouselContainer = () => {
   getCarouselContainer().classList.add('hidden');
@@ -16,31 +16,36 @@ const makeTitleMatchImage = () => {
   titleElement.style.marginLeft = cs.marginLeft;
   titleElement.innerText = title;
 }
-const getActiveIndex = () => {
-  const items = getCarouselItems();
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].classList.contains('active')) {
-      return i;
-    }
-  }
-  return 0;
-}
+// Index of the current image; while the ad is shown, of the image before it.
+let activeIndex = 0;
 const loadImage = (image) => {
   if (!image.getAttribute('src')) {
     image.onload = makeTitleMatchImage;
     image.src = image.getAttribute('data-src');
   }
 }
-const slideTo = (i) => {
-  const items = getCarouselItems();
-  const next = (i + items.length) % items.length;
-  items[getActiveIndex()].classList.remove('active');
-  items[next].classList.add('active');
-  loadImage(items[next].querySelector('img'));
+const activate = (item) => {
+  getCarouselContainer().querySelector('.carousel-item.active').classList.remove('active');
+  item.classList.add('active');
+  document.querySelector('#carousel').classList.toggle('ad-active', isAdActive());
+  loadImage(item.querySelector('img'));
   makeTitleMatchImage();
 }
-const prev = () => slideTo(getActiveIndex() - 1);
-const next = () => slideTo(getActiveIndex() + 1);
+const slideTo = (i) => {
+  const items = getCarouselItems();
+  activeIndex = (i + items.length) % items.length;
+  activate(items[activeIndex]);
+}
+const isAdActive = () => carouselAd !== null && carouselAd.item.classList.contains('active');
+const step = (direction) => {
+  if (carouselAd !== null && !isAdActive() && carouselAd.shouldShow()) {
+    activate(carouselAd.item);
+  } else {
+    slideTo(activeIndex + direction);
+  }
+}
+const prev = () => step(-1);
+const next = () => step(1);
 const showCarousel = (i) => {
   getCarouselContainer().classList.remove('hidden');
   slideTo(i);

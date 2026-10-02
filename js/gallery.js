@@ -1,5 +1,8 @@
 const THUMBNAIL_COLUMNS = 6;
 
+// {item, shouldShow} when the gallery has an ad, see renderAd.
+let carouselAd = null;
+
 const createImage = (className, attribute, src, alt) => {
   const img = document.createElement("img");
   img.className = className;
@@ -88,7 +91,23 @@ const renderThumbnails = (folder, images) => {
   });
 }
 
-const renderGallery = (folder, images) => {
+// ad: {file, alt, href, shouldShow}; shouldShow() decides on each carousel step whether the ad comes next.
+const renderAd = (ad) => {
+  const link = document.createElement("a");
+  link.className = "d-block";
+  link.href = ad.href;
+  link.appendChild(createImage("d-block mw-100", "data-src", ad.file, ad.alt));
+  const item = document.createElement("div");
+  item.className = "carousel-item carousel-ad";
+  item.appendChild(link);
+  document.querySelector("#carousel .carousel-inner").insertBefore(item, document.querySelector("#image-title"));
+  carouselAd = {item: item, shouldShow: ad.shouldShow};
+}
+
+const renderGallery = (folder, images, ad) => {
   renderCarousel(folder, images);
   renderThumbnails(folder, images);
+  if (ad) {
+    renderAd(ad);
+  }
 }

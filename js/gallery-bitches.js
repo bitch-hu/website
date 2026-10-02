@@ -26,4 +26,9 @@ renderGallery("/img/bitches", [
   {file: "dog-corgi-pet-animal-mammal-7058195.jpg", alt: "Cute Asian bitch, fun-sized"},
   {file: "dog-cat-pets-domestic-stable-5883275.jpg", alt: "Chubby mature with a hairy pussy"},
   {file: "dog-obedient-pet-training-animal-7580703.jpg", alt: "Tiny little bitch with a huge pink hole"}
-]);
+], {
+  file: "/img/ad/wanna_see_cocks.jpg",
+  alt: "Wanna see cocks?",
+  href: "/cocks/",
+  shouldShow: () => new Date().getMinutes() % 2 === 0
+});

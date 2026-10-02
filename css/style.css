@@ -29,7 +29,7 @@ summary {
   background-color: rgba(0, 0, 0, .3);
 }
 
-.carousel-item > img {
+.carousel-item img {
   max-height: 80vh;
   max-width: 80vw;
   margin: 0 auto;
@@ -67,4 +67,10 @@ summary {
   width: 100vw;
   height: 100vh;
   background-color: rgba(128, 128, 128, 0.5);
+}
+
+/* narrow prev/next areas while the ad is shown, so its link stays clickable in the middle */
+.ad-active .carousel-control-prev,
+.ad-active .carousel-control-next {
+  width: 15% !important;
 }
