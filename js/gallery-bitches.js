@@ -30,5 +30,5 @@ renderGallery("/img/bitches", [
   file: "/img/ad/wanna_see_cocks.jpg",
   alt: "Wanna see cocks?",
   href: "/cocks/",
-  shouldShow: () => new Date().getMinutes() % 2 === 0
+  shouldShow: shouldShowAd
 });
