@@ -66,6 +66,27 @@ document.addEventListener("keyup", (e) => {
       next();
   }
 });
+// Swipe left: next, swipe right: prev; mostly horizontal moves of at least SWIPE_MIN_DISTANCE px.
+const SWIPE_MIN_DISTANCE = 40;
+let swipeStart = null;
+document.querySelector("#carousel").addEventListener("touchstart", (e) => {
+  swipeStart = e.touches.length === 1 ? {x: e.touches[0].clientX, y: e.touches[0].clientY} : null;
+});
+document.querySelector("#carousel").addEventListener("touchend", (e) => {
+  if (swipeStart === null) {
+    return;
+  }
+  const dx = e.changedTouches[0].clientX - swipeStart.x;
+  const dy = e.changedTouches[0].clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.abs(dx) >= SWIPE_MIN_DISTANCE && Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0) {
+      next();
+    } else {
+      prev();
+    }
+  }
+});
 window.addEventListener("resize", () => {
   makeTitleMatchImage();
 });
