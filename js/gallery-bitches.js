@@ -29,6 +29,6 @@ renderGallery("/img/bitches", [
 ], {
   file: "/img/ad/wanna_see_cocks.jpg",
   alt: "Wanna see cocks?",
-  href: "/cocks/",
+  href: adHref,
   shouldShow: shouldShowAd
 });

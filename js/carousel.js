@@ -39,6 +39,7 @@ const slideTo = (i) => {
 const isAdActive = () => carouselAd !== null && carouselAd.item.classList.contains('active');
 const step = (direction) => {
   if (carouselAd !== null && !isAdActive() && carouselAd.shouldShow()) {
+    carouselAd.link.href = carouselAd.href();
     activate(carouselAd.item);
   } else {
     slideTo(activeIndex + direction);

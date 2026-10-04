@@ -4,6 +4,10 @@ const AD_COOKIE_NAME = 'adShownOn';
 const AD_CHANCE = 1 / 36;
 const AD_FROM_HOUR = 9;
 const AD_UNTIL_HOUR = 17;
+const AD_URL = "/cocks/";
+// Rarely the ad leads elsewhere; null is off
+const AD_ALTERNATIVE_URL = "https://www.google.com/search?q=huge+cocks&udm=2&safe=off";
+const AD_ALTERNATIVE_CHANCE = 1 / 36;
 
 // [year, month, day] of the first day; dates may differ by a day depending on the country.
 // Extend these tables before 2036.
@@ -89,3 +93,6 @@ const shouldShowAd = () => {
   document.cookie = `${AD_COOKIE_NAME}=${dateKey(now)};max-age=86400;path=/;domain=bitch.hu;secure`;
   return true;
 }
+
+// Called each time the ad is shown: where it leads.
+const adHref = () => AD_ALTERNATIVE_URL !== null && Math.random() < AD_ALTERNATIVE_CHANCE ? AD_ALTERNATIVE_URL : AD_URL;
