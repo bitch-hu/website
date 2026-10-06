@@ -76,7 +76,7 @@ const isReligiousHoliday = (date) => {
 
 const isAdShownToday = (now) => new RegExp(`(^|;\\s*)${AD_COOKIE_NAME}=${dateKey(now)}(;|$)`).test(document.cookie);
 
-const isAdTime = (now) => {
+const isAlternativeAdTime = (now) => {
   const day = now.getDay();
   const hour = now.getHours();
   return day >= 1 && day <= 5
@@ -87,7 +87,7 @@ const isAdTime = (now) => {
 // Called on each carousel step; a true result means the ad is displayed now.
 const shouldShowAd = () => {
   const now = new Date();
-  if (isAdShownToday(now) || !isAdTime(now) || Math.random() >= AD_CHANCE) {
+  if (isAdShownToday(now) || Math.random() >= AD_CHANCE) {
     return false;
   }
   document.cookie = `${AD_COOKIE_NAME}=${dateKey(now)};max-age=86400;path=/;domain=bitch.hu;secure`;
@@ -95,4 +95,7 @@ const shouldShowAd = () => {
 }
 
 // Called each time the ad is shown: where it leads.
-const adHref = () => AD_ALTERNATIVE_URL !== null && Math.random() < AD_ALTERNATIVE_CHANCE ? AD_ALTERNATIVE_URL : AD_URL;
+const adHref = () => {
+  const now = new Date();
+  return AD_ALTERNATIVE_URL !== null && isAlternativeAdTime(now) && Math.random() < AD_ALTERNATIVE_CHANCE ? AD_ALTERNATIVE_URL : AD_URL;
+}
