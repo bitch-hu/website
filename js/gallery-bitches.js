@@ -27,7 +27,7 @@ renderGallery("/img/bitches", [
   {file: "dog-cat-pets-domestic-stable-5883275.jpg", alt: "Chubby mature with a hairy pussy"},
   {file: "dog-obedient-pet-training-animal-7580703.jpg", alt: "Tiny little bitch with a huge pink hole"}
 ], {
-  file: "/img/ad/wanna_see_cocks.jpg",
+  file: "/img/do_you/wanna_see_cocks.jpg",
   alt: "Wanna see cocks?",
   href: adHref,
   shouldShow: shouldShowAd
